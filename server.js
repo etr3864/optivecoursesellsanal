@@ -20,6 +20,8 @@ app.use('/api/chapters', require('./src/routes/chapters'));
 app.use('/api/views', require('./src/routes/views'));
 
 app.get('/course', (req, res) => res.sendFile(path.join(__dirname, 'public', 'course.html')));
+app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'public', 'terms.html')));
+app.get('/accessibility', (req, res) => res.sendFile(path.join(__dirname, 'public', 'accessibility.html')));
 
 startSafetyNetScanner();
 
