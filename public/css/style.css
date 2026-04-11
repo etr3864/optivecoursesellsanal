@@ -89,6 +89,29 @@ body {
   animation: fadeIn 0.5s 0.1s ease both;
 }
 
+.login-welcome {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  animation: fadeIn 0.5s 0.15s ease both;
+}
+
+.login-welcome-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.6;
+}
+
+.login-welcome-body {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #a0a0b8;
+  line-height: 1.7;
+}
+
 .login-form {
   width: 100%;
   display: flex;
