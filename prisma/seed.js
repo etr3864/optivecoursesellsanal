@@ -76,14 +76,6 @@ const chapters = [
     videoUrl: 'PLACEHOLDER_VIDEO_ID',
     attachments: [],
   },
-  {
-    number: 10,
-    shortName: 'בניית מערכת סדירה',
-    fullName: 'מ-ניסיון חד פעמי למערכת שעובדת לבד',
-    description: 'נסכם את כל הפרקים ונבנה יחד תהליך סדיר: מי מוריד הקלטות, מתי, מה בודקים, ואיך הממצאים הופכים לשיחות מנהלים. הפרק האחרון שסוגר את המעגל.',
-    videoUrl: 'PLACEHOLDER_VIDEO_ID',
-    attachments: [],
-  },
 ];
 
 async function main() {
@@ -94,7 +86,7 @@ async function main() {
       create: ch,
     });
   }
-  console.log('Seed complete — 10 chapters loaded.');
+  console.log('Seed complete — 9 chapters loaded.');
 }
 
 main()
