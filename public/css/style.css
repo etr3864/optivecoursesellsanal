@@ -35,6 +35,19 @@ body {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  .login-page {
+    align-items: flex-start;
+    overflow-y: auto;
+    min-height: 100dvh;
+    height: auto;
+  }
+
+  .login-container {
+    padding: 40px 24px 60px;
+  }
+}
+
 .login-bg-glow {
   position: fixed;
   top: 50%;
