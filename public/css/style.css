@@ -38,6 +38,7 @@ body {
 @media (max-width: 768px) {
   .login-page {
     align-items: flex-start;
+    overflow-x: hidden;
     overflow-y: auto;
     min-height: 100dvh;
     height: auto;
@@ -84,13 +85,13 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  animation: fadeInUp 0.5s ease both;
 }
 
 .login-logo {
   height: 144px;
   object-fit: contain;
-  animation: fadeIn 0.4s ease both;
+  opacity: 0;
+  animation: fadeInUp 0.6s 0.1s ease forwards;
 }
 
 .login-title {
@@ -98,8 +99,9 @@ body {
   font-weight: 700;
   text-align: center;
   line-height: 1.5;
-  color: var(--white);
-  animation: fadeIn 0.5s 0.1s ease both;
+  color: var(--purple-light);
+  opacity: 0;
+  animation: fadeInUp 0.6s 0.3s ease forwards;
 }
 
 .login-welcome {
@@ -108,7 +110,8 @@ body {
   flex-direction: column;
   gap: 8px;
   text-align: center;
-  animation: fadeIn 0.5s 0.15s ease both;
+  opacity: 0;
+  animation: fadeInUp 0.6s 0.5s ease forwards;
 }
 
 .login-welcome-title {
@@ -130,7 +133,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  animation: fadeIn 0.5s 0.2s ease both;
+  opacity: 0;
+  animation: fadeInUp 0.6s 0.7s ease forwards;
 }
 
 .field-group input {
