@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optive | ניתוח שיחות מכירה</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/daowx6msw/image/upload/q_auto/f_auto/v1761607495/white_logogg_uf3usn.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="login-page">
+
+  <div class="login-bg-glow"></div>
+
+  <img
+    class="login-octopus"
+    src="https://res.cloudinary.com/daowx6msw/image/upload/q_auto/f_auto/v1763893433/ChatGPT_Image_Nov_23_2025_12_23_46_PM_tqfwov.png"
+    alt=""
+    aria-hidden="true"
+  />
+
+  <main class="login-container">
+    <div class="login-card">
+      <img
+        class="login-logo"
+        src="https://res.cloudinary.com/daowx6msw/image/upload/q_auto/f_auto/v1761607495/white_logogg_uf3usn.png"
+        alt="Optive"
+      />
+
+      <h1 class="login-title">ניתוח שיחות מכירה<br />בבינה מלאכותית</h1>
+
+      <form class="login-form" id="loginForm" novalidate>
+        <div class="field-group">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="שם מלא"
+            autocomplete="name"
+            required
+          />
+        </div>
+        <div class="field-group">
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="מספר טלפון"
+            autocomplete="tel"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">
+          <span class="btn-text">כניסה לקורס</span>
+          <span class="btn-loader" aria-hidden="true"></span>
+        </button>
+
+        <p class="login-error" id="loginError" aria-live="polite"></p>
+      </form>
+    </div>
+  </main>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optive | הקורס</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/daowx6msw/image/upload/q_auto/f_auto/v1761607495/white_logogg_uf3usn.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="course-page">
+
+  <header class="course-header">
+    <div class="header-inner">
+      <img
+        src="https://res.cloudinary.com/daowx6msw/image/upload/q_auto/f_auto/v1763910407/white_logoggfdsdfgdfsgds_bdqrww.png"
+        alt="Optive"
+        class="header-logo"
+      />
+      <span class="header-username" id="headerUsername"></span>
+    </div>
+  </header>
+
+  <!-- Desktop Layout: Sidebar + Main Panel -->
+  <div class="desktop-layout" id="desktopLayout">
+    <nav class="chapters-sidebar" id="chaptersSidebar">
+      <div class="sidebar-course-title">
+        <p class="sidebar-subtitle">10 פרקים | ניתוח שיחות מכירה</p>
+      </div>
+      <div class="sidebar-list" id="sidebarList">
+        <div class="loading-state"><div class="spinner"></div></div>
+      </div>
+    </nav>
+
+    <main class="chapter-main-panel" id="chapterMainPanel">
+      <div class="loading-state"><div class="spinner"></div></div>
+    </main>
+  </div>
+
+  <!-- Mobile Layout: Hero + Accordion -->
+  <div class="mobile-layout" id="mobileLayout">
+    <section class="course-hero">
+      <div class="hero-bg-image" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">ניתוח שיחות מכירה<br />בבינה מלאכותית</h1>
+        <p class="hero-subtitle">10 פרקים שילמדו אותך לנתח כל שיחת מכירה עם AI</p>
+      </div>
+    </section>
+
+    <div class="chapters-section">
+      <div class="chapters-list" id="chaptersList">
+        <div class="loading-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="octopus-bg" aria-hidden="true"></div>
+
+  <footer class="course-footer">
+    <p>נבנה באהבה על ידי <a href="https://www.0ptive.com/" target="_blank" rel="noopener noreferrer">Optive</a></p>
+  </footer>
+
+  <script src="/js/course.js"></script>
+</body>
+</html>

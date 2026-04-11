@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String        @id @default(uuid())
+  name      String?
+  phone     String        @unique
+  token     String        @unique
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  views     ChapterView[]
+}
+
+model Chapter {
+  id          String        @id @default(uuid())
+  number      Int           @unique
+  shortName   String
+  fullName    String
+  description String
+  videoUrl    String
+  attachments Json          @default("[]")
+  views       ChapterView[]
+}
+
+model ChapterView {
+  id          String   @id @default(uuid())
+  userId      String
+  chapterId   String
+  viewedAt    DateTime @default(now())
+  webhookSent Boolean  @default(false)
+  retryCount  Int      @default(0)
+  user        User     @relation(fields: [userId], references: [id])
+  chapter     Chapter  @relation(fields: [chapterId], references: [id])
+
+  @@unique([userId, chapterId])
+}
