@@ -232,6 +232,24 @@ body {
   font-weight: 400;
 }
 
+.logout-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--gray);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  margin-right: auto;
+}
+
+.logout-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: var(--white);
+}
+
 /* ─── Desktop Layout ───────────────────────────────────────── */
 .desktop-layout {
   display: none;

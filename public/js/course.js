@@ -42,6 +42,11 @@ window.addEventListener('message', (e) => {
   currentUser = await meRes.json();
   document.getElementById('headerUsername').textContent = currentUser.name || '';
 
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = '/';
+  });
+
   const chaptersRes = await fetch('/api/chapters');
   if (!chaptersRes.ok) { renderError(); return; }
 

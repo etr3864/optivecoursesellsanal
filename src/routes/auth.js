@@ -54,4 +54,8 @@ router.get('/me', authToken, (req, res) => {
   res.json({ name: req.user.name, phone: req.user.phone });
 });
 
+router.post('/logout', (req, res) => {
+  res.clearCookie('token', { path: '/' }).json({ success: true });
+});
+
 module.exports = router;
