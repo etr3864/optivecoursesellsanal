@@ -1,11 +1,10 @@
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
 const apiKey = require('../middleware/apiKey');
 const { normalizePhone } = require('../services/phone');
 const { generateToken } = require('../services/token');
+const prisma = require('../db');
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 router.post('/create', apiKey, async (req, res) => {
   const phone = normalizePhone(req.body.phone);

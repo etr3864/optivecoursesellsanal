@@ -1,9 +1,8 @@
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
 const authToken = require('../middleware/authToken');
+const prisma = require('../db');
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 const SIGNED_URL_TTL_SECONDS = 2 * 60 * 60;
 

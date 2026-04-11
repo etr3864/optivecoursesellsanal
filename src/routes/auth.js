@@ -1,12 +1,11 @@
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
 const { loginLimiter } = require('../middleware/rateLimiter');
 const authToken = require('../middleware/authToken');
 const { normalizePhone } = require('../services/phone');
 const { sendWebhook } = require('../services/webhook');
+const prisma = require('../db');
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 const GENERIC_ERROR = { error: 'הפרטים שהוזנו אינם נכונים' };
 const LOGIN_DELAY_MS = 500;

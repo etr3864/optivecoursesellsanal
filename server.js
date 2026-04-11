@@ -1,16 +1,17 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const { PrismaClient } = require('@prisma/client');
+const prisma = require('./src/db');
 const { sendWebhook } = require('./src/services/webhook');
 const logger = require('./src/utils/logger');
 
 const app = express();
-const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(helmet({ contentSecurityPolicy: false }));
+app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,7 +26,7 @@ app.get('/accessibility', (req, res) => res.sendFile(path.join(__dirname, 'publi
 
 startSafetyNetScanner();
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
 });
 
@@ -34,31 +35,46 @@ function startSafetyNetScanner() {
   const MAX_RETRIES = 10;
 
   setInterval(async () => {
-    const pending = await prisma.chapterView.findMany({
-      where: { webhookSent: false, retryCount: { lt: MAX_RETRIES } },
-      include: { user: true, chapter: true },
-    });
-
-    for (const view of pending) {
-      const sent = await sendWebhook(process.env.WEBHOOK_URL_CHAPTER_VIEW, {
-        event: 'chapter_viewed',
-        name: view.user.name,
-        phone: view.user.phone,
-        chapterNumber: view.chapter.number,
-        chapterName: view.chapter.shortName,
-        timestamp: view.viewedAt.toISOString(),
+    try {
+      const pending = await prisma.chapterView.findMany({
+        where: { webhookSent: false, retryCount: { lt: MAX_RETRIES } },
+        include: { user: true, chapter: true },
       });
 
-      await prisma.chapterView.update({
-        where: { id: view.id },
-        data: sent
-          ? { webhookSent: true }
-          : { retryCount: { increment: 1 } },
-      });
+      for (const view of pending) {
+        const sent = await sendWebhook(process.env.WEBHOOK_URL_CHAPTER_VIEW, {
+          event: 'chapter_viewed',
+          name: view.user.name,
+          phone: view.user.phone,
+          chapterNumber: view.chapter.number,
+          chapterName: view.chapter.shortName,
+          timestamp: view.viewedAt.toISOString(),
+        });
 
-      if (!sent) {
-        logger.warn('Safety net retry failed', { viewId: view.id, retryCount: view.retryCount + 1 });
+        await prisma.chapterView.update({
+          where: { id: view.id },
+          data: sent
+            ? { webhookSent: true }
+            : { retryCount: { increment: 1 } },
+        });
+
+        if (!sent) {
+          logger.warn('Safety net retry failed', { viewId: view.id, retryCount: view.retryCount + 1 });
+        }
       }
+    } catch (err) {
+      logger.error('Safety net scanner error', { error: err.message });
     }
   }, INTERVAL_MS);
 }
+
+async function shutdown() {
+  logger.info('Shutting down...');
+  server.close(async () => {
+    await prisma.$disconnect();
+    process.exit(0);
+  });
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

@@ -1,10 +1,9 @@
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
 const authToken = require('../middleware/authToken');
 const { sendWebhook } = require('../services/webhook');
+const prisma = require('../db');
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 router.post('/', authToken, async (req, res) => {
   const { chapterId } = req.body;
