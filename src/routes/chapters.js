@@ -11,7 +11,7 @@ function buildSignedUrl(videoId) {
   // In dev with placeholder videoId we return a simple embed URL
   const libraryId = process.env.BUNNY_STREAM_LIBRARY_ID;
   if (!libraryId || !videoId) return null;
-  return `https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=false&preload=false`;
+  return `https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=false&preload=true&playsinline=true`;
 }
 
 router.get('/', authToken, async (req, res) => {
