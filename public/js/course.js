@@ -58,8 +58,8 @@ window.addEventListener('message', (e) => {
 // ─── Desktop ─────────────────────────────────────────────────
 
 const SIDEBAR_SECTIONS = [
-  { label: 'יסודות וכלים', range: [1, 5] },
-  { label: 'ניתוח ויישום', range: [6, 10] },
+  { label: 'יסודות וכלים', range: [1, 4] },
+  { label: 'ניתוח ויישום', range: [5, 8] },
 ];
 
 function renderDesktop(chapters) {
