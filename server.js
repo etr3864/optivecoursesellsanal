@@ -19,8 +19,10 @@ app.use('/api/auth', require('./src/routes/auth'));
 app.use('/api/users', require('./src/routes/users'));
 app.use('/api/chapters', require('./src/routes/chapters'));
 app.use('/api/views', require('./src/routes/views'));
+app.use('/api/admin', require('./src/routes/admin'));
 
 app.get('/course', (req, res) => res.sendFile(path.join(__dirname, 'public', 'course.html')));
+app.get('/admindb', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admindb.html')));
 app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'public', 'terms.html')));
 app.get('/accessibility', (req, res) => res.sendFile(path.join(__dirname, 'public', 'accessibility.html')));
 

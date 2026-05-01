@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | ניהול משתמשים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="admin-page">
+
+  <!-- Login Screen -->
+  <div id="loginScreen" class="admin-login-wrap" style="display:none">
+    <div class="admin-login-card">
+      <h1 class="admin-login-title">ניהול משתמשים</h1>
+      <div id="loginError" class="admin-error-msg" style="display:none"></div>
+      <form id="loginForm" autocomplete="off">
+        <div class="admin-field">
+          <label>שם משתמש</label>
+          <input id="loginUsername" type="text" autocomplete="username" placeholder="שם משתמש" />
+        </div>
+        <div class="admin-field">
+          <label>סיסמה</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="סיסמה" />
+        </div>
+        <button type="submit" class="admin-btn admin-btn-primary admin-btn-full" id="loginBtn">כניסה</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="adminPanel" style="display:none">
+    <header class="admin-header">
+      <span class="admin-header-title">ניהול משתמשים</span>
+      <button class="admin-btn admin-btn-ghost" id="logoutBtn">יציאה</button>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- Toolbar -->
+      <div class="admin-toolbar">
+        <div class="admin-toolbar-right">
+          <input id="searchInput" type="search" placeholder="חיפוש לפי שם או טלפון..." class="admin-search" />
+          <span id="userCount" class="admin-user-count"></span>
+        </div>
+        <div class="admin-toolbar-left">
+          <button id="bulkDeleteBtn" class="admin-btn admin-btn-danger" style="display:none">
+            מחק נבחרים (<span id="selectedCount">0</span>)
+          </button>
+          <button id="addUserBtn" class="admin-btn admin-btn-primary">+ הוסף משתמש</button>
+        </div>
+      </div>
+
+      <!-- Add/Edit Form -->
+      <div id="userForm" class="admin-form-card" style="display:none">
+        <div class="admin-form-row">
+          <div class="admin-field admin-field-flex">
+            <label>טלפון <span class="admin-required">*</span></label>
+            <input id="formPhone" type="tel" placeholder="0501234567" />
+          </div>
+          <div class="admin-field admin-field-flex">
+            <label>שם</label>
+            <input id="formName" type="text" placeholder="שם מלא (אופציונלי)" />
+          </div>
+          <div class="admin-form-actions">
+            <button id="formSubmitBtn" class="admin-btn admin-btn-primary">הוסף</button>
+            <button id="formCancelBtn" class="admin-btn admin-btn-ghost">ביטול</button>
+          </div>
+        </div>
+        <div id="formError" class="admin-error-msg" style="display:none"></div>
+      </div>
+
+      <!-- Table -->
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th class="admin-col-check">
+                <input type="checkbox" id="selectAll" />
+              </th>
+              <th>שם</th>
+              <th>טלפון</th>
+              <th>הצטרף</th>
+              <th class="admin-col-actions">פעולות</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+        <div id="emptyState" class="admin-empty" style="display:none">לא נמצאו משתמשים</div>
+        <div id="loadingState" class="admin-loading">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="admin-toast" style="display:none"></div>
+
+  <!-- Confirm Modal -->
+  <div id="confirmModal" class="admin-modal-overlay" style="display:none">
+    <div class="admin-modal">
+      <p id="confirmText" class="admin-modal-text"></p>
+      <div class="admin-modal-actions">
+        <button id="confirmOk" class="admin-btn admin-btn-danger">מחק</button>
+        <button id="confirmCancel" class="admin-btn admin-btn-ghost">ביטול</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admindb.js"></script>
+</body>
+</html>
