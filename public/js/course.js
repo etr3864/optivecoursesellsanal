@@ -181,6 +181,9 @@ function buildMobileCard(chapter) {
     </div>
   `;
 
+  const iframe = card.querySelector('.chapter-video');
+  if (iframe) iframe.src = '';
+
   card.querySelector('.chapter-header').addEventListener('click', () => toggleMobileCard(card, chapter));
   return card;
 }
