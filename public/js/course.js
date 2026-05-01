@@ -174,15 +174,12 @@ function buildMobileCard(chapter) {
     </div>
     <div class="chapter-body">
       <div class="chapter-body-inner">
-        ${chapter.videoUrl ? videoEmbed(chapter.videoUrl, chapter.id) : ''}
+        ${chapter.videoUrl ? `<div class="video-wrapper" data-video-slot data-base-url="${chapter.videoUrl}"></div>` : ''}
         <p class="chapter-description" style="padding-top:16px">${escHtml(chapter.description)}</p>
         ${buildAttachments(chapter.attachments)}
       </div>
     </div>
   `;
-
-  const iframe = card.querySelector('.chapter-video');
-  if (iframe) iframe.src = '';
 
   card.querySelector('.chapter-header').addEventListener('click', () => toggleMobileCard(card, chapter));
   return card;
@@ -216,20 +213,31 @@ function toggleMobileCard(card, chapter) {
 }
 
 function stopCardVideo(card) {
-  const iframe = card.querySelector('.chapter-video');
-  if (!iframe) return;
-  // progress is already saved continuously by the message listener
-  try { iframe.contentWindow.postMessage(JSON.stringify({ event: 'pause' }), '*'); } catch (_) {}
-  iframe.src = '';
+  const slot = card.querySelector('[data-video-slot]');
+  if (!slot) return;
+  const iframe = slot.querySelector('.chapter-video');
+  if (iframe) {
+    try { iframe.contentWindow.postMessage(JSON.stringify({ event: 'pause' }), '*'); } catch (_) {}
+  }
+  slot.innerHTML = '';
 }
 
 function resumeCardVideo(card, chapterId) {
-  const iframe = card.querySelector('.chapter-video');
-  if (!iframe?.dataset.baseUrl) return;
+  const slot = card.querySelector('[data-video-slot]');
+  if (!slot?.dataset.baseUrl) return;
+  const baseUrl = slot.dataset.baseUrl;
   const saved = getProgress(chapterId);
-  iframe.src = saved > 3
-    ? `${iframe.dataset.baseUrl}&t=${saved}`
-    : iframe.dataset.baseUrl;
+  const src = saved > 3 ? `${baseUrl}&t=${saved}` : baseUrl;
+  slot.innerHTML = `
+    <iframe
+      class="chapter-video"
+      data-chapter-id="${chapterId}"
+      src="${src}"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowfullscreen
+      playsinline
+    ></iframe>
+  `;
 }
 
 function scrollToCard(card) {
