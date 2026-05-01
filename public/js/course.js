@@ -207,7 +207,7 @@ function toggleMobileCard(card, chapter) {
   card.classList.add('open');
   openMobileId = chapter.id;
   activeVideoChapterId = chapter.id;
-  resumeCardVideo(card, chapter.id);
+  setTimeout(() => resumeCardVideo(card, chapter.id), 400);
   scrollToCard(card);
   recordView(chapter);
 }
